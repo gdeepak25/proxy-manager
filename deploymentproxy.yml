@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-proxy-manager
+  namespace: default  # Adjust if needed
 spec:
   replicas: 1
   selector:
@@ -14,11 +15,24 @@ spec:
     spec:
       containers:
         - name: app
-          image: jc21/nginx-proxy-manager:latest
+          image: jc21/nginx-proxy-manager:latest  # Change to a specific version if needed
           ports:
-            - containerPort: 80    # HTTP
-            - containerPort: 81    # Admin UI
-            - containerPort: 443   # HTTPS
+            - containerPort: 80
+            - containerPort: 81
+            - containerPort: 443
           env:
             - name: DISABLE_IPV6
-              value: "true"   
+              value: "true"  # Optionally disable IPv6
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          volumeMounts:
+            - name: letsencrypt
+              mountPath: /etc/letsencrypt  # Mount path for Let's Encrypt
+      volumes:
+        - name: letsencrypt
+          emptyDir: {}  # Temporary storage for Let's Encrypt

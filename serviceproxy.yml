@@ -2,20 +2,21 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx-proxy-manager
+  namespace: default  # Adjust if needed
 spec:
-  type: LoadBalancer
   selector:
     app: nginx-proxy-manager
   ports:
-    - name: http
-      protocol: TCP
+    - protocol: TCP
       port: 80
       targetPort: 80
-    - name: https
-      protocol: TCP
-      port: 443
-      targetPort: 443
-    - name: admin
-      protocol: TCP
+      name: http
+    - protocol: TCP
       port: 81
       targetPort: 81
+      name: admin
+    - protocol: TCP
+      port: 443
+      targetPort: 443
+      name: https
+  type: LoadBalancer
