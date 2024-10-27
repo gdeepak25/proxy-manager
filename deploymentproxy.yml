@@ -22,4 +22,4 @@ spec:
           env:
             # Environment variables can be modified or omitted as needed
             - name: DISABLE_IPV6
-              value: "true"   # Optional; may be set to handle potential IPv6 issues
+              value: "true"   
