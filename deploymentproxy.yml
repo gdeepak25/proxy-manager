@@ -16,6 +16,10 @@ spec:
         - name: app
           image: jc21/nginx-proxy-manager:latest
           ports:
-            - containerPort: 80   # HTTP
-            - containerPort: 81   # Admin UI
-            - containerPort: 443  # HTTPS
+            - containerPort: 80    # HTTP
+            - containerPort: 81    # Admin UI
+            - containerPort: 443   # HTTPS
+          env:
+            # Environment variables can be modified or omitted as needed
+            - name: DISABLE_IPV6
+              value: "true"   # Optional; may be set to handle potential IPv6 issues
