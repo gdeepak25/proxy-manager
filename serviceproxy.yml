@@ -4,6 +4,7 @@ metadata:
   name: nginx-proxy-manager
   namespace: nginx-proxy-manager
 spec:
+  type: LoadBalancer
   selector:
     app: nginx-proxy-manager
   ports:
